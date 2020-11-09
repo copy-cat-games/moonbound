@@ -1,0 +1,24 @@
+- can select two cards per turn
+- must have enough energy
+- first card selected is primary, second card is secondary card
+- hand is replenished at the end of turn
+- option to discard card
+- "play" button
+- energy is replenished every turn
+
+- player has 25 health as default? able to change later
+
+[x] finalize the UI on paper
+[x] get the UI looking good, styled
+    [x] wrapper + battlespace + notifications pane
+    [x] notifications themselves
+    [x] cards panel + cards
+    [x] stats panel
+    [x] play cards button
+    [x] deck button + discard button
+[ ] get the UI functional
+    [x] Engine can send player notifications
+    [ ] Engine can update stats
+    [ ] Engine can send cards
+    [ ] player can view deck + discards
+    [ ] player can select cards to play

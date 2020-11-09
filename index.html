@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MOONSHOT!</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="battlespace">
+                <button id="deck-button">Deck</button>
+                <button id="discard-button">Discard</button>
+                <div id="stats-panel"></div>
+                <button id="play-cards-button">Play</button>
+                <div id="cards-panel"></div>
+            </div>
+            <div id="notifications">
+                <!-- info, such as "you took 9 damage!" or "the enemy lost 15 electoral college votes!" -->
+                <!-- this will initially be blank, add .notification elements -->
+            </div>
+            <div id="notifications-cover"></div>
+        </div>
+        <!-- scripts go here -->
+        <script src="js/engine.js"></script>
+        <script>
+            Engine.init();
+        </script>
+    </body>
+</html>
