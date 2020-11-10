@@ -61,5 +61,7 @@ class Player {
     }
 }
 
+// values completely arbitrary, balance the game once we can play it!
 Player.prototype.max_hand_size = 7;
 Player.prototype.max_energy    = 4;
+Player.prototype.max_health    = 20;

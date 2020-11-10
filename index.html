@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>MOONSHOT!</title>
+        <title>Moonbound</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="styles.css" />
     </head>
@@ -10,7 +10,14 @@
             <div id="battlespace">
                 <button id="deck-button">Deck</button>
                 <button id="discard-button">Discard</button>
-                <div id="stats-panel"></div>
+                <div id="stats-panel">
+                    <!-- shows things like health, energy, status effects, etc
+                         not completely sure how this is going to look yet...
+                         let's just give it a shot. a moonshot, if you will. -->
+                    <canvas id="health-bar"></canvas>
+                    <canvas id="energy-bar"></canvas><!-- no, not that kind of energy bar! -->
+                    <div id="stats-effects"><!-- stuff like "extra defense", or "poisoned", or "flabbergasted", or "dying from HL math" --></div>
+                </div>
                 <button id="play-cards-button">Play</button>
                 <div id="cards-panel"></div>
             </div>
