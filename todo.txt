@@ -16,12 +16,13 @@
     [x] stats panel
     [x] play cards button
     [x] deck button + discard button
+    [x] each individual card, resize if necessary
     [ ] main menu (replace wrapper)
     [ ] map (replace battlespace)
         [ ] turn the notifications panel into an info panel
 [ ] get the UI functional
     [x] Engine can send player notifications
     [ ] Engine can update stats
-    [ ] Engine can send cards
+    [x] Engine can send cards
     [ ] player can view deck + discards
     [ ] player can select cards to play
