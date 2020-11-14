@@ -1,10 +1,22 @@
 - can select two cards per turn
 - must have enough energy
 - first card selected is primary, second card is secondary card
+    - third card is nothing
+    - deselect primary, the other stays secondary
 - hand is replenished at the end of turn
 - option to discard card
 - "play" button
 - energy is replenished every turn
+
+- reward at the end of the level: which card to add to deck? choose from three
+- take it or leave it reward?
+- lose a battle, restart the game
+- tutorial is optional
+
+enemies - regular enemies, drop loot and lets you choose 1 out of 3 cards
+events - burning cards to repair ships, or another type of event
+miniboss - loot, drop artifact, 1 of 3 cards to choose
+boss - loot, drops strong artifact, vital ship repair tool, 1 of 3 cards to choose
 
 - player has 25 health as default? able to change later
 

@@ -2,34 +2,39 @@ var Engine = {
     panels: {
         // these appear in the same order as they do in index.html and styles.css
         battlespace: null,
-        deck_button: null,
-        discard_button: null,
         stats_panel: null,
         health_bar: null,
         energy_bar: null,
         stats_effects: null,
-        play_cards_button: null,
         cards: null,
         notifications: null,
     },
     
+    buttons: {
+        deck: null,
+        discard: null,
+        play_cards: null,
+    },
+    
     current_battle: null,
-    selected_cards: [],
+    selected_primary: null,
+    selected_secondary: null,
     
     init: function() {
         // stuff we should do before starting the game
         
         // set up the panels
         this.panels.battlespace       = document.getElementById("battlespace");
-        this.panels.deck_button       = document.getElementById("deck-button");
-        this.panels.discard_button    = document.getElementById("discard-button");
         this.panels.stats_panel       = document.getElementById("stats-panel");
         this.panels.health_bar        = document.getElementById("health-bar");
         this.panels.energy_bar        = document.getElementById("energy-bar");
         this.panels.stats_effects     = document.getElementById("stats-effects");
-        this.panels.play_cards_button = document.getElementById("play-cards-button");
         this.panels.cards             = document.getElementById("cards-panel");
         this.panels.notifications     = document.getElementById("notifications");
+        
+        this.buttons.deck       = document.getElementById("deck-button");
+        this.buttons.discard    = document.getElementById("discard-button");
+        this.buttons.play_cards = document.getElementById("play-cards-button");
     },
     
     update_stats: function(player) {
@@ -114,7 +119,43 @@ var Engine = {
         }
         // hand is an array of cards
         hand.forEach(card => {
-            this.panels.cards.appendChild(this.create_card_elt(card));
+            var card_elt = this.create_card_elt(card);
+            card_elt.addEventListener("click", (event) => {
+                event.preventDefault();
+                if (event.which == 1) {
+                    /*
+                        left click
+                        - check if a primary card is selected. if not, set this as the primary card.
+                        - check if this card is selected as primary/secondary. if so, deselect this card
+                        - otherwise, play an error sound
+                    */
+                    // YandereDev style! if statements for *days*
+                    if (Engine.selected_primary == null && Engine.selected_secondary != card) {
+                        Engine.selected_primary = card;
+                        card_elt.className = "card primary";
+                        card_elt.appendChild(primary_card_badge);
+                    } else if (Engine.selected_secondary == null && Engine.selected_primary != card) {
+                        Engine.selected_secondary = card;
+                        card_elt.className = "card secondary";
+                        card_elt.appendChild(secondary_card_badge);
+                    } else if (Engine.selected_primary == card) {
+                        Engine.selected_primary = null;
+                        card_elt.className = "card";
+                        card_elt.removeChild(primary_card_badge);
+                    } else if (Engine.selected_secondary == card) {
+                        Engine.selected_secondary = null;
+                        card_elt.className = "card";
+                        card_elt.removeChild(secondary_card_badge);
+                    } else {
+                        // play error sound
+                        zzfx(1,.05,580,.13,.16,.15,3,.2,-44,19,463,.35,.15,0,0,.8,0,1,0,0);
+                    }
+                    
+                } else if (event.which == 3) {
+                    // right click
+                }
+            });
+            this.panels.cards.appendChild(card_elt);
         });
     },
     
@@ -131,8 +172,9 @@ var Engine = {
         return card_elt;
     },
     
-    on_click_card: function() {
-        
+    start_battle: function(battle) {
+        battle.next(); // starts the battle
+        // then initiate the player's turn
     },
     
     create_element: function(data) {
@@ -144,3 +186,45 @@ var Engine = {
         return elt;
     }
 };
+
+var primary_card_badge = (function() {
+    var elt       = document.createElement("div");
+    elt.id        = "primary-badge";
+    elt.innerHTML = "1";
+    return elt;
+})();
+
+var secondary_card_badge = (function() {
+    var elt       = document.createElement("div");
+    elt.id        = "secondary-badge";
+    elt.innerHTML = "2";
+    return elt;
+})();
+
+// sounds, that i found with the "random" button on https://killedbyapixel.github.io/ZzFX/
+var sounds = {
+    boop: function() {
+        zzfx(4.3,.05,118,0,.01,.13,0,2,0,0,0,0,0,0,261,0,0,1.3,.14,0);
+    },
+    high: function() {
+        zzfx(1,.05,13,0,0,.01,3,.09,-13,.6,-42,.01,0,0,0,0,0,1,.12,0);
+    },
+    hit: function() {
+        zzfx(1.85,.05,1735,.02,0,.08,4,.77,-0.6,0,0,0,0,0,0,.1,.05,1,.02,.75);
+    },
+    machine: function() {
+        zzfx(2,.05,101,.13,.14,.01,2,2.91,0,0,0,0,.19,0,232,0,.32,1,.05,.25);
+    },
+    pickup: function() {
+        zzfx(1,.05,290,.03,0,0,1,1.19,-30,0,0,0,0,.9,0,0,0,1,.04,.01);
+    },
+    whoosh_whoosh: function() {
+        zzfx(1.99,.05,1406,.02,.11,.05,3,.42,0,33,-2,.2,.05,.5,-0.5,.1,.34,1,.05,0);
+    },
+    zap: function() {
+        zzfx(1,.05,107,.18,.14,0,4,.16,0,0,46,.03,.02,0,0,0,0,.64,.01,0);
+    },
+    zap2: function() {
+        zzfx(1,.05,51,.07,.01,.17,4,0,0,28,0,0,0,.1,-0.1,0,0,.71,.01,.08);
+    },
+}

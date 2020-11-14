@@ -29,6 +29,8 @@
         </div>
         <!-- scripts go here -->
         <script src="js/utils.js"></script>
+        <script src="js/ZzFX.js"></script>
+        <script src="js/battle.js"></script>
         <script src="js/engine.js"></script>
         <script>
             Engine.init();
@@ -70,78 +72,19 @@
                     cost: 0,
                     element: "unobtainium",
                 },
-                {
-                    name: "dummy card",
-                    art: "art/dummy.png",
-                    cost: 0,
-                    element: "unobtainium",
-                },
-                {
-                    name: "dummy card",
-                    art: "art/dummy.png",
-                    cost: 0,
-                    element: "unobtainium",
-                },
-                {
-                    name: "dummy card",
-                    art: "art/dummy.png",
-                    cost: 0,
-                    element: "unobtainium",
-                },
-                {
-                    name: "dummy card",
-                    art: "art/dummy.png",
-                    cost: 0,
-                    element: "unobtainium",
-                },
-                {
-                    name: "dummy card",
-                    art: "art/dummy.png",
-                    cost: 0,
-                    element: "unobtainium",
-                },
-                {
-                    name: "dummy card",
-                    art: "art/dummy.png",
-                    cost: 0,
-                    element: "unobtainium",
-                },
-                {
-                    name: "dummy card",
-                    art: "art/dummy.png",
-                    cost: 0,
-                    element: "unobtainium",
-                },
-                {
-                    name: "dummy card",
-                    art: "art/dummy.png",
-                    cost: 0,
-                    element: "unobtainium",
-                },
-                {
-                    name: "dummy card",
-                    art: "art/dummy.png",
-                    cost: 0,
-                    element: "unobtainium",
-                },
-                {
-                    name: "dummy card",
-                    art: "art/dummy.png",
-                    cost: 0,
-                    element: "unobtainium",
-                },
-                {
-                    name: "dummy card",
-                    art: "art/dummy.png",
-                    cost: 0,
-                    element: "unobtainium",
-                },
             ];
             
-            /*
-            console.log(document.styleSheets[0].rules);
-            set_rule(find_rule(document.styleSheets[0], "#cards-panel"), "background-color", "rebeccapurple");
-            */
+            // it's dummies all the way down!
+            var dummy_enemy = {
+                attack: function() { return; },
+                health: 1,
+            };
+            
+            var dummy_player = {
+                health: 1,
+            };
+            
+            Engine.display_cards(deck);
         </script>
     </body>
 </html>

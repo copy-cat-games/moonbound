@@ -116,6 +116,24 @@ button {
     border-color: indianred;
 }
 
+#primary-badge, #secondary-badge {
+    width: 30px; height: 30px;
+    border-radius: 15px;
+    top: -15px; left: -15px;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 30px;
+}
+
+#primary-badge {
+    background-color: lime;
+}
+
+#secondary-badge {
+    background-color: indianred;
+}
+
 #notifications, #notifications-cover {
     width: 250px; height: 600px;
     top: 0; left: 805px;
