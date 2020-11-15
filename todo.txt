@@ -37,4 +37,4 @@ boss - loot, drops strong artifact, vital ship repair tool, 1 of 3 cards to choo
     [ ] Engine can update stats
     [x] Engine can send cards
     [ ] player can view deck + discards
-    [ ] player can select cards to play
+    [x] player can select cards to play

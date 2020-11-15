@@ -33,7 +33,7 @@ button {
     margin: auto;
 }
 
-#battlespace, #map {
+#battlespace, #map-level-select, #main-menu {
     top: 0; left: 0;
     width: 800px; height: 600px;
     border: 1px solid black;
@@ -87,6 +87,11 @@ button {
     width: 75px; height: 40px;
     border: 1px solid indianred;
     bottom: 158px; right: 163px;
+    visibility: visible;
+}
+
+#play-cards-button:disabled {
+    visibility: hidden;
 }
 
 #cards-panel {
@@ -132,6 +137,16 @@ button {
 
 #secondary-badge {
     background-color: indianred;
+}
+
+#deck-discards-panel {
+    top: 0; left: 0; right: 0; bottom: 0;
+    border: 1px solid black;
+    margin: auto;
+}
+
+#map-level-select, #main-menu {
+    /* the styles for these are also located with the styles for #battlespace */
 }
 
 #notifications, #notifications-cover {

@@ -4,14 +4,33 @@
 function* Battle(enemies, player, reward) {
     var players_turn = true;
     var state        = null;
+    var turns        = 0;
     
     while (!state) {
         if (players_turn) {
+            turns += 1;
             // player attacks
             var cards = yield {
                 enemies: enemies,
                 player: player,
             };
+            
+            Engine.notify("this is your " + (function(n) {
+                // lol ciac wtf
+                if (Math.floor(n / 10) == 1) {
+                    return n + "th";
+                }
+                switch (n % 10) {
+                    case 1:
+                        return n + "st";
+                    case 2:
+                        return n + "nd";
+                    case 3:
+                        return n + "rd";
+                    default:
+                        return n + "th";
+                }
+            })(turns) + " turn.");
             
             if (cards.primary == null) {
                 throw new Error("cards is not valid! no primary card played!");

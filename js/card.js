@@ -2,6 +2,7 @@ var example_card = {
     name: "Example Card",
     art: "/path/to/sprite.png",
     element: "water",
+    description: "a dummy card. just occupies a slot.",
     cost: 1, // cost in energy
     primary: function(battle, player) {
         // primary effect

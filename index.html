@@ -18,8 +18,31 @@
                     <canvas id="energy-bar"></canvas><!-- no, not that kind of energy bar! -->
                     <div id="stats-effects"><!-- stuff like "extra defense", or "poisoned", or "flabbergasted", or "dying from HL math" --></div>
                 </div>
-                <button id="play-cards-button">Play</button>
+                <button id="play-cards-button" disabled>Play</button>
                 <div id="cards-panel"></div>
+                <!-- these will be hidden until they are needed -->
+                <div id="deck-discards-panel" style="visibility: hidden;"></div>
+            </div>
+            <!-- these will be hidden until they are needed -->
+            <div id="map-level-select" style="visibility: hidden;">
+                <!--
+                    still not sure how this is going to work
+                    probably going to turn this into a canvas.
+                    if that happens, i'll have to edit engine.js
+                    to resize it correctly.
+                -->
+            </div>
+            <div id="main-menu" style="visibility: hidden;">
+                <!--
+                    for debugging purposes, the main menu will be hidden for now.
+                    in the "release" of this game, if we even get to that,
+                    this is what the player will see first
+                -->
+                <h1 id="game-title">Moonbound</h1>
+                <div id="main-menu-options">
+                    <button class="menu-button">Play</button>
+                    <button class="menu-button">Credits</button>
+                </div>
             </div>
             <div id="notifications">
                 <!-- info, such as "you took 9 damage!" or "the enemy lost 15 electoral college votes!" -->
@@ -38,37 +61,37 @@
             var deck = [
                 {
                     name: "dummy card",
-                    art: "art/dummy.png",
+                    art: "art/dummy2.png",
                     cost: 0,
                     element: "unobtainium",
                 },
                 {
                     name: "dummy card",
-                    art: "art/dummy.png",
+                    art: "art/dummy2.png",
                     cost: 0,
                     element: "unobtainium",
                 },
                 {
                     name: "dummy card",
-                    art: "art/dummy.png",
+                    art: "art/dummy2.png",
                     cost: 0,
                     element: "unobtainium",
                 },
                 {
                     name: "dummy card",
-                    art: "art/dummy.png",
+                    art: "art/dummy2.png",
                     cost: 0,
                     element: "unobtainium",
                 },
                 {
                     name: "dummy card",
-                    art: "art/dummy.png",
+                    art: "art/dummy2.png",
                     cost: 0,
                     element: "unobtainium",
                 },
                 {
                     name: "dummy card",
-                    art: "art/dummy.png",
+                    art: "art/dummy2.png",
                     cost: 0,
                     element: "unobtainium",
                 },
@@ -82,9 +105,10 @@
             
             var dummy_player = {
                 health: 1,
+                hand: deck,
             };
             
-            Engine.display_cards(deck);
+            Engine.start_battle(Battle([dummy_enemy], dummy_player, null));
         </script>
     </body>
 </html>

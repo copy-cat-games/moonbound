@@ -35,6 +35,40 @@ var Engine = {
         this.buttons.deck       = document.getElementById("deck-button");
         this.buttons.discard    = document.getElementById("discard-button");
         this.buttons.play_cards = document.getElementById("play-cards-button");
+        
+        this.buttons.play_cards.addEventListener("click", function() {
+            Engine.play_cards();
+        });
+        
+        addEventListener("keypress", function(event) {
+            switch (event.keyCode) {
+                case 20:
+                    if (Engine.selected_primary != null) {
+                        Engine.play_cards();
+                    }
+                    break;
+            }
+        });
+    },
+    
+    play_cards: function(primary, secondary) {
+        // sanity check
+        if (this.current_battle == null) {
+            console.error("there's no battle! what the hell are you playing cards for?")
+            return;
+        }
+        
+        console.log("playing cards...");
+        this.buttons.play_cards.disabled = true;
+        var battle_state = this.current_battle.next({
+            primary: this.selected_primary,
+            secondary: this.selected_secondary
+        }).value;
+        
+        this.selected_primary = null, this.selected_secondary = null;
+        
+        // redisplay the cards, now that it's the player's turn again
+        this.display_cards(battle_state.player.hand);
     },
     
     update_stats: function(player) {
@@ -99,14 +133,14 @@ var Engine = {
     
     display_cards: function(hand) {
         var card_rule = find_rule(document.styleSheets[0], ".card");
-        var width     = 100, height = 190;
+        var width     = 100, height = 151.85;
         if (hand.length > 11) {
             width  = 45;
-            height = width * 1.9;
+            height = width * 1.5185;
         } else if (hand.length > 5) {
             // edit the stylesheet
             width  = (540 / hand.length) - 7;
-            height = width * 1.9;
+            height = width * 1.5185;
         }
         
         set_rule(card_rule, "width", width + "px");
@@ -134,6 +168,7 @@ var Engine = {
                         Engine.selected_primary = card;
                         card_elt.className = "card primary";
                         card_elt.appendChild(primary_card_badge);
+                        Engine.buttons.play_cards.disabled = null;
                     } else if (Engine.selected_secondary == null && Engine.selected_primary != card) {
                         Engine.selected_secondary = card;
                         card_elt.className = "card secondary";
@@ -142,6 +177,7 @@ var Engine = {
                         Engine.selected_primary = null;
                         card_elt.className = "card";
                         card_elt.removeChild(primary_card_badge);
+                        Engine.buttons.play_cards.disabled = true;
                     } else if (Engine.selected_secondary == card) {
                         Engine.selected_secondary = null;
                         card_elt.className = "card";
@@ -151,6 +187,11 @@ var Engine = {
                         zzfx(1,.05,580,.13,.16,.15,3,.2,-44,19,463,.35,.15,0,0,.8,0,1,0,0);
                     }
                     
+                    if (Engine.selected_primary == null) {
+                        Engine.buttons.play_cards.style.visibility = "hidden";
+                    } else {
+                        Engine.buttons.play_cards.style.visibility = "visible";
+                    }
                 } else if (event.which == 3) {
                     // right click
                 }
@@ -165,16 +206,14 @@ var Engine = {
             class: "card",
         });
         card_elt.style.backgroundImage = "url(" + card.art + ")";
-        
-        // also got to add the event handlers... ugh...
-        // i'll do it later
-        
         return card_elt;
     },
     
     start_battle: function(battle) {
-        battle.next(); // starts the battle
+        this.current_battle = battle;
+        var battle_state = battle.next().value; // starts the battle
         // then initiate the player's turn
+        Engine.display_cards(battle_state.player.hand);
     },
     
     create_element: function(data) {
